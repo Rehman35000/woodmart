@@ -11,10 +11,13 @@
 
     <title>Straps Archives - WoodMart Accessories</title>
     <link rel="stylesheet" href="./straps.css">
+    <link rel="stylesheet" href="./styles.css">
 </head>
 
 <body>
 
+
+    <?php include './navbar.php' ?>
 
     <div class="container-fluid accessories d-flex justify-content-center align-items-center">
         <h1 class="text-white display-4">

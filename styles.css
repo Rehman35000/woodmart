@@ -11,6 +11,7 @@ body{
     opacity: 0;
     visibility: hidden;
     z-index: -2;
+    z-index: 444;
 }
 
 .nav-li:hover  .nested-list{
@@ -31,4 +32,65 @@ body{
 
 .text-xsm{
     font-size: 0.5rem !important;
+}
+
+.inner-shadow{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+.categories li:hover{
+    color: #2E6BC6 !important;
+    cursor: pointer;
+    
+}
+
+
+.cat::after{
+    content: '';
+    width: 100%;
+    height: 3px;
+    background-color: #2E6BC6;
+    display: block;
+}
+
+.menu::after{
+    content: '';
+    width: 0;
+    height: 3px;
+    display: block;
+    background-color: #2E6BC6;
+    transition: all 0.3s;
+}
+
+.menu:hover::after{
+    width: 100%;
+}
+
+
+.add-line::after{
+    content: '';
+    width: 100%;
+    height: 3px;
+    display: block;
+    background-color: #2E6BC6;
+    transition: all 0.3s;
+}
+
+.sidebar{
+    visibility: hidden;
+    transition: all 0.1s;
+}
+.sidebar-menu{
+transform:translateX(-100%);
+transition: all 0.3s;
+}
+
+.hero-content{
+    /* margin-left: 10rem !important; */
+}
+
+@media (max-width:768px){
+    .hero-content h1,.hero-content p{
+        margin: 1rem auto !important;
+    }
 }
