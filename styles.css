@@ -89,6 +89,22 @@ transition: all 0.3s;
     /* margin-left: 10rem !important; */
 }
 
+.hero-image{
+    transition: all 0.8s !important;
+}
+.hero-content{
+    transition: all 0.8s !important;
+    transform: translate(300px,400px);
+    opacity: 0;
+    /* scale: 0.3; */
+}
+
+.move-content{
+    transform: translate(0,0) !important;
+    opacity: 1;
+    scale: 1;
+}
+
 @media (max-width:768px){
     .hero-content h1,.hero-content p{
         margin: 1rem auto !important;
