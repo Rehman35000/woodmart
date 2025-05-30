@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Aquarelle iPhone XR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <style>
+        /* Base Styles */
+        .thumbnail {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .thumbnail img {
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+        }
+        .thumbnail img.active {
+            border-color: #007bff;
+            transform: scale(1.05);
+        }
+        .main-img {
+            width: 100%;
+            max-height: 600px;
+            height: auto;
+            object-fit: contain;
+            padding: 5px;
+            display: block;
+        }
+        .main-image-container {
+            position: relative;
+            height: 100%;
+        }
+        .product-title {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .price {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .stock-status {
+            color: #28a745;
+            margin-bottom: 25px;
+        }
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .quantity-selector p {
+            margin: 0;
+            padding: 8px 12px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .quantity-selector p:first-child,
+        .quantity-selector p:last-child {
+            background-color: #f8f9fa;
+        }
+        .quantity-selector p:nth-child(2) {
+            border-left: 1px solid #dee2e6;
+            border-right: 1px solid #dee2e6;
+        }
+        .btn-cart {
+            background-color: #2A61B4;
+            color: white;
+            padding: 8px 20px;
+            font-weight: 500;
+        }
+        .btn-buy {
+            background-color: #000;
+            color: white;
+            padding: 8px 20px;
+            font-weight: 500;
+        }
+        .action-buttons {
+            margin: 25px 0;
+        }
+        .secondary-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+            align-items: center;
+        }
+        .secondary-actions a {
+            color: #6c757d;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        .secondary-actions a:hover {
+            color: #2A61B4;
+        }
+        .inventory-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 25px 0;
+        }
+        .payment-methods {
+            margin-top: 30px;
+        }
+        .payment-methods img {
+            height: 30px;
+            margin-right: 10px;
+        }
+        .social-share {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .social-share a {
+            color: #6c757d;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        .social-share a:hover {
+            color: #2A61B4;
+        }
+        .share-text {
+            margin-right: 10px;
+        }
+        .payment-logos-container {
+            display: flex;
+            justify-content: center;
+            max-width: 100%;
+        }
+        .payment-logo {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+        }
+        /* Navigation arrows */
+        .image-navigation {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            pointer-events: none;
+            z-index: 10;
+        }
+        .nav-arrow {
+            pointer-events: auto;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin: 0 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .nav-arrow:hover {
+            background-color: rgba(255,255,255,1);
+            transform: scale(1.1);
+        }
+        .nav-arrow i {
+            font-size: 24px;
+            color: #333;
+        }
+
+        /* Mobile-specific styles */
+        @media (max-width: 991.98px) {
+            .thumbnail {
+                flex-direction: row;
+                justify-content: center;
+                margin-bottom: 20px;
+            }
+            .thumbnail img {
+                width: 60px;
+                height: 60px;
+                margin-bottom: 0;
+            }
+            .product-title {
+                font-size: 24px;
+                text-align: center;
+            }
+            .price, .stock-status {
+                text-align: center;
+            }
+            .action-buttons .btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            .secondary-actions {
+                justify-content: center;
+            }
+            .inventory-info {
+                text-align: center;
+            }
+        }
+        
+        .category-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .category-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 120px;
+        }
+        
+        .category-icon {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 8px;
+        }
+        
+        .category-label {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: #333;
+        }
+      
+        .category-grid {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .category-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .category-item img {
+            margin-right: 8px;
+        }
+        
+        .big-input {
+            width: 100%;
+            min-height: 150px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 16px;
+            outline: none;
+            resize: vertical;
+        }
+
+        .product-new-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 80px;
+            margin-bottom: 60px;
+        }
+
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .card-wrapper {
+            width: 18%;
+            min-width: 180px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+
+        .new {
+            position: relative;
+            width: 100%;
+            height: 70%;
+            overflow: hidden;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .new img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .icons {
+            position: absolute;
+            top: 20px;
+            right: -100px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: right 0.4s ease;
+            z-index: 2;
+        }
+
+        .icons i {
+            background: #fff;
+            color: #000;
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .icons i:hover {
+            background-color: #eee;
+            color: black;
+        }
+
+        .new:hover .icons {
+            right: 15px;
+        }
+
+        .add-to-cart {
+            position: absolute;
+            bottom: -60px;
+            width: calc(100% - 20px);
+            left: 10px;
+            background-color: #3f51b5;
+            color: white;
+            border-radius: 30px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: bottom 0.4s ease;
+            padding: 10px;
+            z-index: 2;
+        }
+
+        .new:hover .add-to-cart {
+            bottom: 15px;
+        }
+
+        .footer {
+            padding: 30px 0;
+        }
+
+        .footer a:hover {
+            color: #0d6efd !important;
+        }
+        
+        /* Enhanced Mobile Responsiveness */
+        @media (max-width: 767.98px) {
+            /* Breadcrumb */
+            .breadcrumb-nav {
+                font-size: 14px;
+                white-space: nowrap;
+                overflow-x: auto;
+                padding-bottom: 5px;
+            }
+            
+            /* Product Gallery */
+            .col-3.col-md-2 {
+                width: 20%;
+            }
+            
+            .col-9.col-md-10 {
+                width: 80%;
+            }
+            
+            .thumbnail img {
+                width: 50px;
+                height: 50px;
+            }
+            
+            /* Product Info */
+            .product-title {
+                font-size: 22px;
+            }
+            
+            .price {
+                font-size: 20px;
+            }
+            
+            .quantity-selector p {
+                padding: 6px 10px;
+            }
+            
+            /* Features Section */
+            .col-lg-3, .col-lg-6 {
+                margin-bottom: 20px;
+            }
+            
+            /* Category Grid */
+            .d-flex.flex-wrap {
+                gap: 15px !important;
+            }
+            
+            .category-item {
+                width: 100px;
+            }
+            
+            .category-item img {
+                width: 24px;
+                margin-right: 5px;
+            }
+            
+            /* Product Cards */
+            .card-wrapper {
+                width: 45%;
+                min-width: 150px;
+            }
+            
+            /* Footer */
+            .footer {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .footer ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+        
+        @media (max-width: 575.98px) {
+            /* Extreme mobile sizes */
+            .product-title {
+                font-size: 20px;
+            }
+            
+            .price {
+                font-size: 18px;
+            }
+            
+            .action-buttons .btn {
+                font-size: 14px;
+                padding: 6px 12px;
+            }
+            
+            .secondary-actions a {
+                font-size: 13px;
+            }
+            
+            .card-wrapper {
+                width: 100%;
+            }
+            
+            .category-grid {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .d-flex.flex-wrap {
+                gap: 10px !important;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid py-2 border-bottom">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="breadcrumb-nav">
+                <a href="#" class="text-decoration-none text-secondary">Home</a> / 
+                <a href="#" class="text-decoration-none text-secondary">Cases</a> / 
+                <a href="#" class="text-decoration-none text-secondary">iPhone XR</a> / 
+                <span class="fw-bold">Full Aquarelle iPhone XR</span>
+            </div>
+            <div class="d-flex align-items-center gap-2 d-none d-md-flex">
+                <i class="bi bi-chevron-left"></i>
+                <i class="bi bi-grid"></i>
+                <i class="bi bi-chevron-right"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-3 my-md-5">
+    <div class="row gx-lg-5">
+        <!-- Image Gallery -->
+        <div class="col-12 col-lg-7 mb-4 mb-lg-0">
+            <div class="row">
+                <div class="col-3 col-md-2">
+                    <div class="thumbnail">
+                        <img src="./assets/images/zxc.jpg" class="thumb-img active" onclick="changeImage(this, 0)">
+                        <img src="./assets/images/zxcz.jpg" class="thumb-img" onclick="changeImage(this, 1)">
+                        <img src="./assets/images/zxczx.jpg" class="thumb-img" onclick="changeImage(this, 2)">
+                    </div>
+                </div>
+                <div class="col-9 col-md-10">
+                    <div class="main-image-container h-100">
+                        <img src="./assets/images/zxc.jpg" id="mainImage" class="main-img w-100 h-100">
+                        <!-- Navigation Arrows -->
+                        <div class="image-navigation">
+                            <div class="nav-arrow" onclick="navigate(-1)">
+                                <i class="bi bi-chevron-left"></i>
+                            </div>
+                            <div class="nav-arrow" onclick="navigate(1)">
+                                <i class="bi bi-chevron-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Info -->
+        <div class="col-12 col-lg-5">
+            <div class="d-flex flex-column h-100 ps-lg-4">
+                <div class="vbnvbnn d-flex flex-row justify-content-between align-items-center mb-3">
+                    <h1 class="product-title m-0">Full Aquarelle iPhone XR</h1>
+                    <img src="./assets/images/nmm.webp" width="60px" alt="" class="d-none d-lg-block">
+                </div>
+                <div class="price">$169.00</div>
+                <div class="stock-status">✔ 537 in stock</div>
+                
+                <div class="action-buttons w-100">
+                    <div class="d-flex flex-column flex-md-row gap-2 align-items-center">
+                        <div class="quantity-selector">
+                            <p onclick="decreaseQuantity()">-</p>
+                            <p id="quantity">1</p>
+                            <p onclick="increaseQuantity()">+</p>
+                        </div>
+                        <button class="btn btn-cart flex-grow-1">ADD TO CART</button>
+                        <button class="btn btn-buy flex-grow-1">BUY NOW</button>
+                    </div>
+                </div>
+
+                <div class="secondary-actions d-flex flex-wrap justify-content-center justify-content-lg-start gap-3 mt-4">
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-nowrap fw-bold"><i class="bi bi-arrow-left-right"></i> Add to compare</a>
+                        <a href="#" class="text-nowrap fw-bold"><i class="bi bi-heart"></i> Add to wishlist</a>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="share-text">Share:</span>
+                        <div class="d-flex gap-2">
+                            <a href="#"><i class="bi bi-facebook"></i></a>
+                            <a href="#"><i class="bi bi-twitter-x"></i></a>
+                            <a href="#"><i class="bi bi-instagram"></i></a>
+                            <a href="#"><i class="bi bi-pinterest"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="inventory-info d-flex flex-column flex-md-row justify-content-center justify-content-lg-start gap-3 gap-md-5 mt-4">
+                    <div>Ordered: <span class="fw-bold">0</span></div>
+                    <div>Items available: <span class="fw-bold">537</span></div>
+                </div>
+                
+                <div class="payment-methods mt-auto">
+                    <h6 class="mb-2 text-center text-lg-start">Guaranteed Safe Checkout</h6>
+                    <div class="payment-logos-container">
+                        <img src="./assets/images/vbnvbn.jpg" alt="Payment methods" class="payment-logo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row d-flex align-items-center">
+        <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+            <img src="./assets/images/mnj.webp" class="img-fluid" alt="">
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+            <img src="./assets/images/canvas-category.jpg.webp" class="img-fluid" alt="">
+        </div>
+        <div class="col-lg-6">
+            <h3>Features</h3>
+            <p style="font-size: 13px;" class="text-secondary">Using dummy content or fake information in the Web design process can result in products with unrealistic assumptions and potentially serious design flaws. A seemingly elegant design can quickly begin to bloat with unexpected content or break under the weight of actual activity. Fake data can ensure a nice looking layout but it doesn't reflect what a living, breathing application must endure.</p>
+            
+            <div class="category-grid">
+                <div class="d-flex flex-wrap justify-content-center justify-content-lg-start" style="gap: 15px 123px;">
+                    <div class="category-item d-flex flex-row align-items-center">
+                        <img src="./assets/images/Capture1.PNG" width="32px" alt="" class="me-2">
+                        <p class="category-label mb-0">Ecology</p>
+                    </div>
+                    <div class="category-item d-flex flex-row align-items-center">
+                        <img src="./assets/images/Capture2.PNG" width="32px" alt="" class="me-2">
+                        <p class="category-label mb-0">Creativity</p>
+                    </div>
+                    <div class="category-item flex-row d-flex align-items-center">
+                        <img src="./assets/images/Capture3.PNG" width="32px" alt="" class="me-2">
+                        <p class="category-label mb-0">Materials</p>
+                    </div>
+                </div>
+                
+                <div class="d-flex flex-wrap justify-content-center justify-content-lg-start mt-3" style="gap: 15px 123px;">
+                    <div class="category-item d-flex flex-row align-items-center">
+                        <img src="./assets/images/Capture4.PNG" width="32px" alt="" class="me-2">
+                        <p class="category-label mb-0">Chargers</p>
+                    </div>
+                    <div class="category-item d-flex flex-row align-items-center">
+                        <img src="./assets/images/Capture5.PNG" width="32px" alt="" class="me-2">
+                        <p class="category-label mb-0">MagSafe</p>
+                    </div>
+                    <div class="category-item flex-row d-flex align-items-center">
+                        <img src="./assets/images/Capture6.PNG" width="32px" alt="" class="me-2">
+                        <p class="category-label mb-0">Power & Cables</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row d-flex align-items-center p-3">
+        <div class="col-lg-6 order-2 order-lg-1">
+            <h4>All-rounded Protection</h4>
+            <p class="text-secondary" style="font-size: 14px;">Rated for drops up to 6 feet, these cases include additional internal shock-absorbing geometry to protect your phone. A series of ribs surround the phone and are specifically designed to direct force away from the device during an impact. We even leave room for you to apply a screen protector, giving you that extra comfort.</p>
+            <button class="btn text-white p-2 py-2 px-1 fw-bold" style="background-color: #2960B2;">Questions & Answers</button>
+        </div>
+        <div class="col-lg-6 order-1 order-lg-2 mb-4 mb-lg-0">
+            <img src="./assets/images/mmn.webp" class="img-fluid" style="border-radius: 10px;" alt="">
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row d-flex align-items-center p-3">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+            <img src="./assets/images/mmn.webp" class="img-fluid" style="border-radius: 10px;" alt="">
+        </div>
+        <div class="col-lg-6">
+            <h4>Materials</h4>
+            <p class="text-secondary" style="font-size: 14px;">We've been working on perfecting bioplastics that feel good, wear well, and compost when you're finished using them as a phone case. You'll find the same great material in our iPhone Bio Case.</p>
+            <p class="text-secondary" style="font-size: 14px;">Our bioplastic is verified to meet U.S. (ASTM D6400-04) and E.U. (EN13432) standards for compostability. It means you can toss your case in the city compost bin when you upgrade your phone.</p>
+            <div class="tesf d-flex gap-3">
+                <div class="it">
+                    <img src="./assets/images/zxa.png" alt="" class="img-fluid">
+                </div>
+                <div class="im">
+                    <h4>Brooklyn Simmons</h4>
+                    <p class="text-secondary">BARONE LLC</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid my-4">
+    <h3>Customer Reviews</h3>
+    <div class="row">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+            <h6>Reviews</h6>
+            <p class="text-secondary">There are no reviews yet.</p>
+        </div>
+        <div class="col-lg-6">
+            <h6 style="font-size: 14px;">Be the first to review "Full Aquarelle iPhone XR"</h6>
+            <p class="text-secondary" style="font-size: 14px;">Your email address will not be published. Required fields are marked *</p>
+            <p style="font-size: 14px;">Your Rating <span style="color: red;">*</span> : </p>
+            <p style="font-size: 14px;">Your Review <span style="color: red;">*</span> </p>
+            <textarea class="big-input" placeholder="Type here..."></textarea>
+            <p style="font-size: 14px;">Name <span style="color: red;">*</span> </p>
+            <input type="text" style="height: 44px;border: 1px solid #ccc;outline: none;" class="w-100" name="" id="">
+            <p class="mt-2" style="font-size: 14px;">Email <span style="color: red;">*</span> </p>
+            <input type="text" style="height: 44px; border: 1px solid #ccc;outline: none;" class="w-100">
+            <div class="bnv d-flex flex-row align-items-center mt-2 mb-2">
+                <input type="checkbox" name="" id="" style="margin-right: 8px;">
+                <p style="font-size: 14px; margin: 0;">Save my name, email, and website in this browser for the next time I comment.</p>
+            </div>
+            <button class="btn text-white px-4" style="background-color: #007bff;">SUBMIT</button>
+        </div>
+    </div>
+</div>
+
+<div class="product-new-container">
+    <div class="product-grid">
+        <!-- Card 1 -->
+        <div class="card-wrapper">
+            <div class="new">
+                <img src="./assets/images/we.webp" alt="Product">
+                <div class="icons">
+                    <i class="bi bi-arrow-left-right"></i>
+                    <i class="bi bi-heart"></i>
+                    <i class="bi bi-list-ul"></i>
+                </div>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <h6 class="text-center fw-bold">iPhone 13 Case Max-Black</h6>
+            <p class="text-center text-secondary">iPhone 13</p>
+            <p class="text-center text-primary">$159.00</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card-wrapper">
+            <div class="new">
+                <img src="./assets/images/wd.webp" alt="Product">
+                <div class="icons">
+                    <i class="bi bi-arrow-left-right"></i>
+                    <i class="bi bi-heart"></i>
+                    <i class="bi bi-list-ul"></i>
+                </div>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <h6 class="text-center fw-bold">Power Bank 10000mAh</h6>
+            <p class="text-center text-secondary">Power Banks</p>
+            <p class="text-center text-primary">$79.00</p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card-wrapper">
+            <div class="new">
+                <img src="./assets/images/wc.webp" alt="Product">
+                <div class="icons">
+                    <i class="bi bi-arrow-left-right"></i>
+                    <i class="bi bi-heart"></i>
+                    <i class="bi bi-list-ul"></i>
+                </div>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <h6 class="text-center fw-bold">Wireless Charger</h6>
+            <p class="text-center text-secondary">Chargers</p>
+            <p class="text-center text-primary">$49.00</p>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="card-wrapper">
+            <div class="new">
+                <img src="./assets/images/wb.webp" alt="Product">
+                <div class="icons">
+                    <i class="bi bi-arrow-left-right"></i>
+                    <i class="bi bi-heart"></i>
+                    <i class="bi bi-list-ul"></i>
+                </div>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <h6 class="text-center fw-bold">Battery Case</h6>
+            <p class="text-center text-secondary">iPhone Cases</p>
+            <p class="text-center text-primary">$99.00</p>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="card-wrapper">
+            <div class="new">
+                <img src="./assets/images/wa.webp" alt="Product">
+                <div class="icons">
+                    <i class="bi bi-arrow-left-right"></i>
+                    <i class="bi bi-heart"></i>
+                    <i class="bi bi-list-ul"></i>
+                </div>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <h6 class="text-center fw-bold">Slim Battery Case</h6>
+            <p class="text-center text-secondary">iPhone Cases</p>
+            <p class="text-center text-primary">$89.00</p>
+        </div>
+    </div>
+</div>
+
+<div class="footer d-flex flex-column flex-xl-row align-items-center justify-content-center justify-content-xl-between flex-wrap gap-3 p-4 bg-black text-white">
+    <div class="top d-flex align-items-center">
+        <img src="./assets/images/wood-logo-dark.svg" alt="Logo" width="200" style="filter: brightness(0) invert(1);">
+    </div>
+
+    <div class="msa d-flex align-items-center">
+        <ul class="list-unstyled d-flex flex-wrap align-items-center justify-content-center gap-3 mb-0">
+            <li><a href="#" class="text-decoration-none text-white">About us</a></li>
+            <li><a href="#" class="text-decoration-none text-white">Privacy Policy</a></li>
+            <li><a href="#" class="text-decoration-none text-white">Shipping</a></li>
+            <li><a href="#" class="text-decoration-none text-white">Track Order</a></li>
+            <li><a href="#" class="text-decoration-none text-white">FAQs</a></li>
+        </ul>
+    </div>
+
+    <div class="rsd d-flex align-items-center">
+        <p class="mb-0">Xtemos Studio Copyright &copy; 2025</p>
+    </div>
+</div>
+
+<script>
+    const images = [
+        "zxc.jpg",
+        "zxcz.jpg",
+        "zxczx.jpg"
+    ];
+    let currentIndex = 0;
+    let quantity = 1;
+
+    function changeImage(imgElement, index) {
+        currentIndex = index;
+        document.getElementById('mainImage').src = imgElement.src;
+        
+        const allThumbs = document.querySelectorAll('.thumb-img');
+        allThumbs.forEach((img, i) => {
+            img.classList.toggle('active', i === index);
+        });
+    }
+    
+    function navigate(direction) {
+        currentIndex += direction;
+        
+        if (currentIndex < 0) currentIndex = images.length - 1;
+        if (currentIndex >= images.length) currentIndex = 0;
+        
+        document.getElementById('mainImage').src = images[currentIndex];
+        
+        const allThumbs = document.querySelectorAll('.thumb-img');
+        allThumbs.forEach((img, i) => {
+            img.classList.toggle('active', i === currentIndex);
+        });
+    }
+    
+    function updateQuantity() {
+        document.getElementById('quantity').textContent = quantity;
+    }
+    
+    function increaseQuantity() {
+        quantity++;
+        updateQuantity();
+    }
+    
+    function decreaseQuantity() {
+        if (quantity > 1) {
+            quantity--;
+            updateQuantity();
+        }
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

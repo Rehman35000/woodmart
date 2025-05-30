@@ -42,7 +42,7 @@
                         </ul>
                     </li>
                     <li class="position-relative nav-li">
-                        <div class="d-flex">Power Bank <img src="./assets/icons/dropdown.svg" width="10px" alt=""></div>
+                        <a href="./vbv.php" class="d-flex">Power Bank <img src="./assets/icons/dropdown.svg" width="10px" alt=""></a>
                         <ul style="width: 200px;top:40px;"
                             class="card nested-list position-absolute text-secondary list-unstyled p-3 shadow">
                             <li class="py-1">iPhone 13</li>

@@ -251,11 +251,11 @@ body {
   }
 
   .imcs-left {
-    background-image: url("https://woodmart.xtemos.com/accessories/wp-content/uploads/sites/7/2022/04/accessories-banner-3.jpg");
+    background-image: url("./assets/images/accessories-banner-3.jpg.webp");
   }
 
   .imcs-right {
-    background-image: url("https://woodmart.xtemos.com/accessories/wp-content/uploads/sites/7/2022/04/battary-cases-min.jpg");
+    background-image: url("./assets/images/battary-cases-min.jpg.webp");
   }
 
   .cons {
@@ -475,7 +475,7 @@ body {
       
       <!-- Centered logo -->
       <a class="navbar-brand mx-auto" href="#">
-        <img src="https://woodmart.xtemos.com/accessories/wp-content/themes/woodmart/images/wood-logo-dark.svg" alt="Logo" width="120">
+        <img src="./assets/images/wood-logo-dark.svg" alt="Logo" width="120">
       </a>
       
       <!-- Cart icon -->
@@ -494,7 +494,7 @@ body {
   <nav class="navbar navbar-expand-lg py-3 px-4 bg-white desktop-nav">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
-        <img src="https://woodmart.xtemos.com/accessories/wp-content/themes/woodmart/images/wood-logo-dark.svg" alt="Logo" width="150">
+        <img src="./assets/images/images/wood-logo-dark.svg" alt="Logo" width="150">
       </a>
       
       <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#woodmartNavbar">
@@ -677,7 +677,7 @@ body {
 
 <!-- Banner Image -->
 <div class="imaged">
-  <img src="this1.jpg" 
+  <img src="./assets/images/this1.jpg" 
        alt="Banner" 
        style="height:200px; width:100%; object-fit:cover">
 </div>
@@ -687,23 +687,23 @@ body {
 <!-- Categories -->
 <div class="container-fluid d-flex flex-wrap py-5 category-row">
   <div class="col-lg-2 text-center">
-    <img src="https://woodmart.xtemos.com/accessories/wp-content/uploads/sites/7/2022/04/w-accessories-product-12.jpg.webp" 
+    <img src="./assets/images/wood-accessories-category-6-3.jpg.webp" 
          width="100"
-         alt="Charger">
+         alt="Charger" class="rounded-pill">
     <h6>Charger</h6>
     <p class="text-secondary">12 Products</p>
   </div>
   <div class="col-lg-2 text-center">
-    <img src="https://woodmart.xtemos.com/accessories/wp-content/uploads/sites/7/2022/08/w-accessories-product-iphone-11-2-430x491.jpg.webp" 
+    <img src="./assets/images/wood-accessories-category-6-1.jpg.webp" 
          width="100"
-         alt="Cases">
+         alt="Cases" class="rounded-pill">
     <h6>Cases</h6>
     <p class="text-secondary">51 Products</p>
   </div>
   <div class="col-lg-2 text-center">
-    <img src="https://woodmart.xtemos.com/accessories/wp-content/uploads/sites/7/2022/04/w-accessories-product-11-430x491.jpg.webp" 
+    <img src="./assets/images/wood-accessories-category-6-2.jpg.webp" 
          width="100"
-         alt="Cables">
+         alt="Cables" class="rounded-pill">
     <h6>Cables</h6>
     <p class="text-secondary">18 Products</p>
   </div>
@@ -712,32 +712,32 @@ body {
 <!-- Brands -->
 <div class="container-fluid d-flex flex-wrap justify-content-center py-5 category-row">
   <div class="col-lg-2 text-center">
-    <img src="https://woodmart.xtemos.com/accessories/wp-content/uploads/sites/7/2022/04/w-accessories-brand-3.png.webp" 
+    <img src="./assets/images/w-accessories-brand-3.png.webp" 
          width="100"
          alt="Brand">
   </div>
   <div class="col-lg-2 text-center">
-    <img src="https://woodmart.xtemos.com/accessories/wp-content/uploads/sites/7/2022/04/w-accessories-brand-4.png.webp" 
+    <img src="./assets/images/w-accessories-brand-4.png.webp" 
          width="100"
          alt="Brand">
   </div>
   <div class="col-lg-2 text-center">
-    <img src="https://woodmart.xtemos.com/accessories/wp-content/uploads/sites/7/2022/04/w-accessories-brand-9.png.webp" 
+    <img src="./assets/images/w-accessories-brand-9.png.webp" 
          width="100"
          alt="Brand">
   </div>
   <div class="col-lg-2 text-center">
-    <img src="https://woodmart.xtemos.com/accessories/wp-content/uploads/sites/7/2022/04/w-accessories-brand-12.png.webp" 
+    <img src="./assets/images/w-accessories-brand-12.png.webp" 
          width="100"
          alt="Brand">
   </div>
   <div class="col-lg-2 text-center">
-    <img src="https://woodmart.xtemos.com/accessories/wp-content/uploads/sites/7/2022/04/w-accessories-brand-11.png.webp" 
+    <img src="./assets/images/w-accessories-brand-11.png.webp" 
          width="100"
          alt="Brand">
   </div>
   <div class="col-lg-2 text-center">
-    <img src="https://woodmart.xtemos.com/accessories/wp-content/uploads/sites/7/2022/04/w-accessories-brand-10.png.webp" 
+    <img src="./assets/images/w-accessories-brand-10.png.webp" 
          width="100"
          alt="Brand">
   </div>
@@ -775,7 +775,7 @@ body {
     <!-- Card 1 -->
     <div class="card-wrapper">
       <div class="new">
-        <img src="this2.webp" 
+        <img src="./assets/images/this2.webp" 
              alt="Product">
         <div class="icons">
           <i class="fas fa-random"></i>
@@ -792,7 +792,7 @@ body {
     <!-- Card 2 -->
     <div class="card-wrapper">
       <div class="new">
-        <img src="https://woodmart.xtemos.com/accessories/wp-content/uploads/sites/7/2022/04/power-banks-pb-5.jpg.webp" 
+        <img src="./assets/images/power-banks-pb-5.jpg.webp" 
              alt="Product">
         <div class="icons">
           <i class="fas fa-random"></i>
@@ -810,7 +810,7 @@ body {
     <div class="card-wrapper">
       <div class="new">
         <span class="badge-new">NEW</span>
-        <img src="https://woodmart.xtemos.com/accessories/wp-content/uploads/sites/7/2022/04/power-banks-wirelles-1.jpg.webp" 
+        <img src="./assets/images/power-banks-wirelles-1.jpg.webp" 
              alt="Product">
         <div class="icons">
           <i class="fas fa-random"></i>
@@ -827,7 +827,7 @@ body {
     <!-- Card 4 -->
     <div class="card-wrapper">
       <div class="new">
-        <img src="https://woodmart.xtemos.com/accessories/wp-content/uploads/sites/7/2022/04/power-banks-battery-case-5.jpg.webp" 
+        <img src="./assets/images/power-banks-battery-case-5.jpg.webp" 
              alt="Product">
         <div class="icons">
           <i class="fas fa-random"></i>
@@ -844,7 +844,7 @@ body {
     <!-- Card 5 -->
     <div class="card-wrapper">
       <div class="new">
-        <img src="https://woodmart.xtemos.com/accessories/wp-content/uploads/sites/7/2022/04/power-banks-battery-case-3.jpg.webp" 
+        <img src="./assets/images/power-banks-battery-case-3.jpg.webp" 
              alt="Product">
         <div class="icons">
           <i class="fas fa-random"></i>
@@ -863,7 +863,7 @@ body {
 <!-- Footer -->
 <div class="footer d-flex flex-column flex-xl-row align-items-center justify-content-center justify-content-xl-between flex-wrap gap-3 p-4 bg-black text-white">
   <div class="top d-flex align-items-center">
-    <img src="https://woodmart.xtemos.com/accessories/wp-content/themes/woodmart/images/wood-logo-dark.svg" 
+    <img src="./assets/images/wood-logo-dark.svg" 
          alt="Logo" 
          width="200" 
          style="filter: brightness(0) invert(1);">
