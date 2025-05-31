@@ -14,7 +14,7 @@
     <?php include './navbar.php' ?>
     <?php include './sidebar.php' ?>
     <?php include './slider.php' ?>
-
+    <?php include './categories.php' ?>
     <script src="./app.js"></script>
 
 

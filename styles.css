@@ -1,9 +1,13 @@
+*{
+    box-sizing: border-box !important;
+}
 :root{
     --main-color : #2E6BC6;
 }
 body{
     font-family: "Host Grotesk", sans-serif !important;
   font-optical-sizing: auto !important;
+  overflow-x: hidden;
 }
 .nested-list{
     transition: all 0.6s;
@@ -103,6 +107,48 @@ transition: all 0.3s;
     transform: translate(0,0) !important;
     opacity: 1;
     scale: 1;
+}
+
+
+.slider-cat {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 1rem;
+    padding: 1rem 0;
+    width: 100%;
+}
+
+.slider-cat .card {
+    flex: 0 0 auto;
+    min-width: 200px;
+    scroll-snap-align: start;
+    background: white;
+}
+
+.slider-cat .s-image {
+    width: 80px;
+    height: 80px;
+    background: #f3f3f3;
+}
+
+.slider-cat img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .slider-cat .card {
+        min-width: 150px;
+    }
+
+    .slider-cat .s-image {
+        width: 60px !important;
+        height: 60px !important;
+    }
 }
 
 @media (max-width:768px){
