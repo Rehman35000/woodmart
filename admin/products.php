@@ -16,39 +16,30 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Quantum Smartphone</td>
-                    <td>Electronics</td>
-                    <td>$699</td>
-                    <td>150</td>
-                    <td>
-                        <button class="btn btn-sm btn-warning me-2"><i class="fas fa-edit"></i> Edit</button>
-                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Smart Jacket</td>
-                    <td>Clothing</td>
-                    <td>$129</td>
-                    <td>200</td>
-                    <td>
-                        <button class="btn btn-sm btn-warning me-2"><i class="fas fa-edit"></i> Edit</button>
-                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>LED Lamp</td>
-                    <td>Home & Garden</td>
-                    <td>$49</td>
-                    <td>300</td>
-                    <td>
-                        <button class="btn btn-sm btn-warning me-2"><i class="fas fa-edit"></i> Edit</button>
-                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</button>
-                    </td>
-                </tr>
+                <?php 
+                    include '../config.php';
+                    $select = "SELECT * FROM products";
+                    $result = mysqli_query($connection,$select);
+                    foreach($result as $row){
+                        echo "
+                            <tr>
+                                <td> {$row['id']} </td>
+                                <td>{$row['name']}</td>
+                                <td>{$row['category']}</td>
+                                <td>{$row['price']}</td>
+                                <td>$ {$row['stock']}</td>
+                                <td>
+                                    <img src='../product_images/{$row['image']}' class='border object-fit-contain' width='60px' height='60px' >
+                                </td>
+                                <td>
+                                    <button class='btn btn-sm btn-warning me-2'><i class='fas fa-edit'></i> Edit</button>
+                                    <button class='btn btn-sm btn-danger'><i class='fas fa-trash'></i> Delete</button>
+                                </td>
+                            </tr>
+                        ";
+                    }
+                ?>
+
             </tbody>
         </table>
     </div>
@@ -63,17 +54,24 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="product-form">
+                <form method="POST" action="./add-product.php" enctype="multipart/form-data" id="product-form">
                     <div class="mb-3">
                         <label for="product-name" class="form-label">Product Name</label>
                         <input type="text" class="form-control" id="product-name" name="name" required>
                     </div>
                     <div class="mb-3">
                         <label for="product-category" class="form-label">Category</label>
-                        <select class="form-control" id="product-category" name="category" required>
-                            <option value="Electronics">Electronics</option>
-                            <option value="Clothing">Clothing</option>
-                            <option value="Home & Garden">Home & Garden</option>
+                        <select class="form-control text-capitalize" id="product-category" name="category" required>
+                            <?php 
+                                include '../config.php';
+                                $select = "SELECT * FROM categories";
+                                $result = mysqli_query($connection,$select);
+                                foreach($result as $item){
+
+                                    echo "<option class='text-capitalize' value='{$item['name']}'>{$item['name']}</option>";
+                                }
+                                ?>
+
                         </select>
                     </div>
                     <div class="mb-3">
@@ -81,8 +79,17 @@
                         <input type="number" class="form-control" id="product-price" name="price" step="0.01" required>
                     </div>
                     <div class="mb-3">
+                        <label for="product-desc" class="form-label">Description</label>
+                        <textarea type="text" class="form-control" id="product-desc" name="description" step="0.01"
+                            rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
                         <label for="product-stock" class="form-label">Stock</label>
                         <input type="number" class="form-control" id="product-stock" name="stock" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="product-image" class="form-label">Stock</label>
+                        <input type="file" class="form-control" id="product-image" name="image" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Save Product</button>
                 </form>

@@ -30,7 +30,7 @@
                                 </td>
                                 <td>
                                     <button class='btn btn-sm btn-warning me-2'><i class='fas fa-edit'></i> Edit</button>
-                                    <button class='btn btn-sm btn-danger'><i class='fas fa-trash'></i> Delete</button>
+                                    <a href='./delete-category.php?id={$item['id']}' class='btn btn-sm btn-danger'><i class='fas fa-trash'></i> Delete</a>
                                 </td>
                             </tr>
                         ";

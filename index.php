@@ -15,6 +15,7 @@
     <?php include './sidebar.php' ?>
     <?php include './slider.php' ?>
     <?php include './categories.php' ?>
+    <?php include './products.php' ?>
     <script src="./app.js"></script>
 
 
